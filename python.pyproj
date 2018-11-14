@@ -4,7 +4,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>1fd2c63b-e8b8-425e-9a07-5d4fc8a42e14</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>Guess.py</StartupFile>
+    <StartupFile>DragonRealm.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
@@ -21,8 +21,10 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="DragonRealm.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Guess.py" />
-    <Compile Include="python.py" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
   <!-- Uncomment the CoreCompile target to enable the Build command in
