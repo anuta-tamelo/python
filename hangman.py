@@ -85,9 +85,16 @@ def playAgain():
     return input(). lower().startswith('y')
 
 def resetGameState():
+    global missedLetters
     missedLetters = ''
+
+    global correctLetters
     correctLetters = ''
+
+    global secretWord
     secretWord = getRandomWord(words)
+
+    global gameIsDone
     gameIsDone = False
 
 
