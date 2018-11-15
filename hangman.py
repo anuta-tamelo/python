@@ -48,30 +48,36 @@ def getRandomWord(wordList):
     wordIndex = random.randint(0, len(wordList) - 1)
     return wordList[wordIndex]
 
+def getCurrentPicture(missedLetters):
+    return HANGMAN_PICS[len(missedLetters)]
+
+def printLine(string):
+    for letter in string:
+        print(letter, end=' ')
+    print()
+
+
 def displayBoard(missedLetters, correctLetters, secretWord):
-    print(HANGMAN_PICS[len(missedLetters)])
+    print(getCurrentPicture(missedLetters))
     print()
 
     print('Missed letters:', end=' ')
-    for letter in missedLetters:
-        print(letter, end=' ')
-    print()
+    printLine(missedLetters)
 
-    blanks = '_' * len(secretWord)
+    blanks = ['_'] * len(secretWord)
 
     for i in range(len(secretWord)):
         if secretWord[i] in correctLetters:
-            blanks = blanks[:i] + secretWord[i] + blanks[i + 1:]
+           blanks[i] = secretWord[i]
 
-    for letter in blanks:
-        print(letter, end=' ')
-    print()
+    printLine(blanks)
 
 def getGuess(alreadyGuessed):
     while True:
         print('Guess a letter.')
         guess = input()
         guess = guess.lower()
+
         if len(guess) != 1:
             print('Please enter a single letter.')
         elif guess in alreadyGuessed:
@@ -83,7 +89,7 @@ def getGuess(alreadyGuessed):
 
 def playAgain():
     print('Do you want to play again? (yes or no)')
-    return input(). lower().startswith('y')
+    return input().lower().startswith('y')
 
 def resetGameState():
     global missedLetters
@@ -97,24 +103,22 @@ def resetGameState():
 
     global gameIsDone
     gameIsDone = False
-
+    
 
 print ('H A N G M A N')
 resetGameState()
 
+def isManHung(missedLetters):
+    return len(missedLetters) == len(HANGMAN_PICS) - 1
 
 while True:
     displayBoard(missedLetters, correctLetters, secretWord)
     guess = getGuess(missedLetters + correctLetters)
 
     if guess in secretWord:
-        correctLetters = correctLetters + guess
-        foundAllLetters = True
+        correctLetters += guess
 
-        for i in range(len(secretWord)):
-            if secretWord[i] not in correctLetters:
-                foundAllLetters = False
-                break
+        foundAllLetters = all(letter in correctLetters for letter in secretWord)
 
         if foundAllLetters:
             print('Yes! The secret word is "' + secretWord + '"! You have won!')
@@ -122,11 +126,10 @@ while True:
     else:
         missedLetters += guess
 
-        if len(missedLetters) == len(HANGMAN_PICS) - 1:
+        if isManHung(missedLetters):
             displayBoard(missedLetters, correctLetters, secretWord)
-            print('You have run out of guesses!\nAfter ' + 
-                  str(len(missedLetters)) + ' missed guesses and ' +
-                  str(len(correctLetters)) + ' correct guesses, the word was "' + secretWord + '"')
+            print('You have run out of guesses!\nAfter ', len(missedLetters), ' missed guesses and ',
+                  len(correctLetters), ' correct guesses, the word was "', secretWord, '"')
             gameIsDone = True
 
     if gameIsDone:
