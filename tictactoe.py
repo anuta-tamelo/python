@@ -14,10 +14,10 @@ def inputPlayerLetter():
         print('Do you want to be X or O?')
         letter = input().upper()
 
-    return ['X', 'O'] if letter == X else ['O', 'X']
+    return ['X', 'O'] if letter == 'X' else ['O', 'X']
 
 def whoGoesfirst():
-     return 'computer' if random.randint(0, 1) == 0 else player
+     return 'computer' if random.randint(0, 1) == 0 else 'player'
 
 def makeMove(board, letter, move):
     board[move] = letter
