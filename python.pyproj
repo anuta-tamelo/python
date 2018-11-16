@@ -4,7 +4,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>1fd2c63b-e8b8-425e-9a07-5d4fc8a42e14</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>hangman.py</StartupFile>
+    <StartupFile>tictactoe.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
@@ -26,6 +26,9 @@
     </Compile>
     <Compile Include="Guess.py" />
     <Compile Include="hangman.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="tictactoe.py">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
