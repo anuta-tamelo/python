@@ -14,59 +14,54 @@ def inputPlayerLetter():
         print('Do you want to be X or O?')
         letter = input().upper()
 
-    if letter == 'X':
-        return ['X', 'O']
-    else:
-        return ['O', 'X']
+    return ['X', 'O'] if letter == X else ['O', 'X']
 
 def whoGoesfirst():
-    if random.randint(0,1) == 0:
-        return 'computer'
-    else:
-        return 'player'
+     return 'computer' if random.randint(0, 1) == 0 else player
 
 def makeMove(board, letter, move):
     board[move] = letter
 
-def isWinner(bo, le):
+def isWinner(board, party):
     return (
-        (bo[7] == le and bo[8] == le and bo[9] == le) or 
-        (bo[4] == le and bo[5] == le and bo[6] == le) or 
-        (bo[1] == le and bo[2] == le and bo[3] == le) or 
-        (bo[7] == le and bo[4] == le and bo[1] == le) or 
-        (bo[8] == le and bo[5] == le and bo[2] == le) or 
-        (bo[9] == le and bo[6] == le and bo[3] == le) or 
-        (bo[7] == le and bo[5] == le and bo[3] == le) or 
-        (bo[9] == le and bo[5] == le and bo[1] == le)
+        (board[7] == party and board[8] == party and board[9] == party) or 
+        (board[4] == party and board[5] == party and board[6] == party) or 
+        (board[1] == party and board[2] == party and board[3] == party) or 
+        (board[7] == party and board[4] == party and board[1] == party) or 
+        (board[8] == party and board[5] == party and board[2] == party) or 
+        (board[9] == party and board[6] == party and board[3] == party) or 
+        (board[7] == party and board[5] == party and board[3] == party) or 
+        (board[9] == party and board[5] == party and board[1] == party)
     )
 
-def getBoardCopy(board): return list(board)
+def getBoardCopy(board):
+    return list(board)
 
-def isSpaceFree(board, move): return board[move] == EMPTY
+def isSpaceFree(board, move):
+    return board[move] == EMPTY
 
 def getPlayerMove(board):
-    move = None
-    while move not in '1 2 3 4 5 6 7 8 9'.split() or not isSpaceFree(board, int(move)):
+    while True:
         print('What is your next move? (1-9)')
         move = input()
-
-    return int(move)
+        if move in '123456789':
+            move = int(move)
+            if isSpaceFree(board, move): return move
 
 def chooseMove(board, movesList):
     possibleMoves = [move for move in movesList if isSpaceFree(board, move)]
-
     return random.choice(possibleMoves) if possibleMoves else None
 
 
 def getComputerMove(board, computerLetter):
-    for i in range(1,10):
+    for cell in range(1,10):
         boardCopy = getBoardCopy(board)
-        if isSpaceFree(boardCopy, i):
-            makeMove(boardCopy, computerLetter, i)
+        if isSpaceFree(boardCopy, cell):
+            makeMove(boardCopy, computerLetter, cell)
             if isWinner(boardCopy, computerLetter):
-                return i
+                return cell
 
-    move = chooseMove(board, [1,3,7,9])
+    move = chooseMove(board, [1, 3, 7, 9])
     if move != None:
         return move
 
