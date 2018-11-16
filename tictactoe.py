@@ -52,13 +52,17 @@ def chooseMove(board, movesList):
     possibleMoves = [move for move in movesList if isSpaceFree(board, move)]
     return random.choice(possibleMoves) if possibleMoves else None
 
+def canWin(board, move):
+    if isSpaceFree(board, move):
+        boardCopy = getBoardCopy(board)
+        makeMove(boardCopy, computerLetter, move)
+        return isWinner(boardCopy, computerLetter)
+    
+    return False
 
 def getComputerMove(board, computerLetter):
     for cell in range(1,10):
-        boardCopy = getBoardCopy(board)
-        if isSpaceFree(boardCopy, cell):
-            makeMove(boardCopy, computerLetter, cell)
-            if isWinner(boardCopy, computerLetter):
+        if canWin(board, cell):
                 return cell
 
     move = chooseMove(board, [1, 3, 7, 9])
