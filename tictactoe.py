@@ -48,7 +48,7 @@ def getPlayerMove(board):
             move = int(move)
             if isSpaceFree(board, move): return move
 
-def chooseMove(board, movesList):
+def chooseRandomMove(board, movesList):
     possibleMoves = [move for move in movesList if isSpaceFree(board, move)]
     return random.choice(possibleMoves) if possibleMoves else None
 
@@ -61,18 +61,21 @@ def canWin(board, move):
     return False
 
 def getComputerMove(board, computerLetter):
-    for cell in range(1,10):
+    for cell in range(1, 10):
         if canWin(board, cell):
                 return cell
 
-    move = chooseMove(board, [1, 3, 7, 9])
+    #move = next((cell for cell in range(1, 10) if canWin(board, cell)), None)
+    #if move: return move
+
+    move = chooseRandomMove(board, [1, 3, 7, 9])
     if move != None:
         return move
 
     if isSpaceFree(board, 5):
         return 5
 
-    return chooseMove(board, [2, 4, 6, 8])
+    return chooseRandomMove(board, [2, 4, 6, 8])
 
 def isBoardFull(board):
     return all([isSpaceFree(board,cell) for cell in range(1,10)])
