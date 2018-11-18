@@ -4,7 +4,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>1fd2c63b-e8b8-425e-9a07-5d4fc8a42e14</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>tictactoe.py</StartupFile>
+    <StartupFile>hangman.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>

@@ -61,7 +61,7 @@ def canWin(board, move):
     return False
 
 def getComputerMove(board, computerLetter):
-    for cell in range(1, 10):
+    for cell in range(1, 10):  
         if canWin(board, cell):
                 return cell
 

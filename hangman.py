@@ -1,52 +1,14 @@
 import random
 
-HANGMAN_PICS = ['''
-  +---+
-      |
-      |
-      |
-     ===''','''
-  +---+
-  O   |
-      |
-      |
-     ===''','''
-  +---+
-  O   |
-  |   |
-      |
-     ===''','''
-  +---+
-  O   |
- /|   |
-      |
-     ===''','''
-  +---+
-  O   |
- /|\  |
-      |
-     ===''','''
-  +---+
-  O   |
- /|\  |
- /    |
-     ===''','''
-  +---+
-  O   |
- /|\  |
- /    |
-     ===''','''
-  +---+
-  O   |
- /|\  |
- / \  |
-     ===''']
+words = {'Animals':'ant baboon badger bat bear beaver camel cat clam cobra cougar coyote crow deer dog donkey duck eagle ferret fox frog goat goose hawk lion lizard llama mole monkey moose mouse mule newt otter owl panda parrot pigeon python rabbit ram rat raven rhino salmon seal shark sheep skunk sloth snake spider stork swan tiger toad trout turkey turtle weasel whale wolf wombat zebra'.split(), 
+         'Colors':'red orange yellow green blue indigo violet white black brown'.split(),
+         'Shapes':'square triange rectangle circle ellipse rhombus trapezoid chevron pentagon hexagon septagon octagon'.split(),
+         'Fruits':'apple orange lemon lime pear watermelon grape grapefruit cherry banana cantaloupe mango strawberry'.split(),}
 
-words = 'ant baboon badger bat bear beaver camel cat clam cobra cougar coyote crow deer dog donkey duck eagle ferret fox frog goat goose hawk lion lizard llama mole monkey moose mouse mule newt otter owl panda parrot pigeon python rabbit ram rat raven rhino salmon seal shark sheep skunk sloth snake spider stork swan tiger toad trout turkey turtle weasel whale wolf wombat zebra'.split()
-
-def getRandomWord(wordList):
-    wordIndex = random.randint(0, len(wordList) - 1)
-    return wordList[wordIndex]
+def getRandomWord(wordDict):
+    wordKey = random.choice(list(wordDict.keys()))
+    wordIndex = random.randint(0, len(wordDict[wordKey]) - 1)
+    return [wordDict[wordKey][wordIndex], wordKey]
 
 def getCurrentPicture(missedLetters):
     return HANGMAN_PICS[len(missedLetters)]
@@ -92,6 +54,80 @@ def playAgain():
     return input().lower().startswith('y')
 
 def resetGameState():
+    print ('H A N G M A N')
+
+    global HANGMAN_PICS
+    HANGMAN_PICS = ['''
+  +---+
+      |
+      |
+      |
+     ===''','''
+  +---+
+  O   |
+      |
+      |
+     ===''','''
+  +---+
+  O   |
+  |   |
+      |
+     ===''','''
+  +---+
+  O   |
+ /|   |
+      |
+     ===''','''
+  +---+
+  O   |
+ /|\  |
+      |
+     ===''','''
+  +---+
+  O   |
+ /|\  |
+ /    |
+     ===''','''
+  +---+
+  O   |
+ /|\  |
+ /    |
+     ===''','''
+  +---+
+  O   |
+ /|\  |
+ / \  |
+     ===''','''
+  +---+
+ [O   |
+ /|\  |
+ / \  |
+     ===''','''
+  +---+
+ [O   |
+ /|\  |
+ / \  |
+     ===''','''
+  +---+
+ [O]  |
+ /|\  |
+ / \  |
+     ===''']
+
+    difficulty = None
+
+    while not difficulty or difficulty not in 'EMH':
+        print('Enter difficulty: E - easy, M - medium, H - hard')
+        difficulty = input().upper()
+        if difficulty == 'M':
+            del HANGMAN_PICS[8]
+            del HANGMAN_PICS[7]
+        if difficulty == 'H':
+            del HANGMAN_PICS[8]
+            del HANGMAN_PICS[7]
+            del HANGMAN_PICS[5]
+            del HANGMAN_PICS[3]
+
     global missedLetters
     missedLetters = ''
 
@@ -99,17 +135,17 @@ def resetGameState():
     correctLetters = ''
 
     global secretWord
-    secretWord = getRandomWord(words)
+    global secretSet
+    secretWord, secretSet = getRandomWord(words)
 
     global gameIsDone
     gameIsDone = False
     
 
-print ('H A N G M A N')
-resetGameState()
-
 def isManHung(missedLetters):
     return len(missedLetters) == len(HANGMAN_PICS) - 1
+
+resetGameState()
 
 while True:
     displayBoard(missedLetters, correctLetters, secretWord)
@@ -137,43 +173,3 @@ while True:
             resetGameState()
         else:
             break
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-     
-
-
-
-
-
-
-
-
-
-
-
