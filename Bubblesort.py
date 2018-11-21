@@ -6,11 +6,5 @@ def bubbleSort(array, cmp):
 
 a = [1, 0, 5, 4, 2, 0]
 
-def cmpLess(left, right):
-    return left < right
-
-def cmpGreat(left, right):
-    return not cmpLess(left, right)
-
-bubbleSort(a, cmpGreat)
-print(a)
+#bubbleSort(a, lambda left, right: left > right)
+print(a[::-2])
