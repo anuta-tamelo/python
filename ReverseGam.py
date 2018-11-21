@@ -19,9 +19,7 @@ def drawBoard(board):
 
 def getNewBoard():
     # Creates a brand-new, blank board data structure.
-    board = []
-    for i in range(WIDTH):
-        board.append([' '] * HEIGHT)
+    board = [[' '] * HEIGHT for _ in range(8)]
     return board
 
 def isValidMove(board, tile, xstart, ystart):
@@ -114,12 +112,13 @@ def makeMove(board, tile, move):
     xstart, ystart = move[0], move[1]
     tilesToFlip = isValidMove(board, tile, xstart, ystart)
 
-    if tilesToFlip == False:
+    if not tilesToFlip:
         return False
 
     board[xstart][ystart] = tile
     for x, y in tilesToFlip:
         board[x][y] = tile
+
     return True
 
 def getBoardCopy(board):
@@ -139,7 +138,8 @@ def isOnCorner(x, y):
 def getPlayerMove(board, playerTile):
     # Let the player enter their move.
     # Returns the move as [x, y] (or returns the strings 'hints' or 'quit').
-    DIGITS1TO8 = '1 2 3 4 5 6 7 8'.split()
+    DIGITS1TO8 = '12345678'
+
     while True:
         print('Enter your move, "quit" to end the game, or "hints" to toggle hints.')
         move = input().lower()
@@ -149,15 +149,14 @@ def getPlayerMove(board, playerTile):
         if len(move) == 2 and move[0] in DIGITS1TO8 and move[1] in DIGITS1TO8:
             x = int(move[0]) - 1
             y = int(move[1]) - 1
-            if isValidMove(board, playerTile, x, y) == False:
-                continue
+            if isValidMove(board, playerTile, x, y):
+                return [x, y]
             else:
-                break
+                print('A move should flip at least one tile.')
         else:
             print('That is not a valid move. Enter the column (1-8) and then the row (1-8).')
             print('For example, 81 will move on the top-right corner.')
 
-    return [x, y]
 
 def getComputerMove(board, computerTile):
     # Given a board and the computer's tile, determine where to
@@ -179,6 +178,7 @@ def getComputerMove(board, computerTile):
         if score > bestScore:
             bestMove = [x, y]
             bestScore = score
+
     return bestMove
 
 def printScore(board, playerTile, computerTile):
