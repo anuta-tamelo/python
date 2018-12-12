@@ -4,7 +4,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>1fd2c63b-e8b8-425e-9a07-5d4fc8a42e14</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>ReverseGam.py</StartupFile>
+    <StartupFile>Algorithms\selectionsort.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
@@ -21,6 +21,12 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Algorithms\binarysearch.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Algorithms\selectionsort.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Bagels.py">
       <SubType>Code</SubType>
     </Compile>
@@ -40,9 +46,15 @@
     <Compile Include="ReverseGam.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="scratchpad.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="tictactoe.py">
       <SubType>Code</SubType>
     </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Algorithms\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
   <!-- Uncomment the CoreCompile target to enable the Build command in
