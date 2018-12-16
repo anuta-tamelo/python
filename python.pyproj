@@ -4,7 +4,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>1fd2c63b-e8b8-425e-9a07-5d4fc8a42e14</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>Algorithms\count_recursion.py</StartupFile>
+    <StartupFile>Algorithms\maxnumber_recursion.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
@@ -25,6 +25,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Algorithms\count_recursion.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Algorithms\maxnumber_recursion.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Algorithms\sum_recursion.py">
